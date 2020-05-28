@@ -63,7 +63,7 @@ if (!function_exists('bappi_setup')) :
 
 		// Set up the WordPress core custom background feature.
 		add_theme_support('custom-background', apply_filters('bappi_custom_background_args', array(
-			'default-color' => 'ffffff',
+			'default-color' => '000000',
 			'default-image' => '',
 		)));
 
@@ -82,6 +82,14 @@ if (!function_exists('bappi_setup')) :
 			'flex-width'  => true,
 			'flex-height' => true,
 		));
+		$args = array(
+			'default-image'      => '',
+			'width'              => 1000,
+			'height'             => 125,
+			'flex-width'         => true,
+			'flex-height'        => true,
+		);
+		add_theme_support('custom-header', $args);
 	}
 endif;
 add_action('after_setup_theme', 'bappi_setup');
@@ -159,7 +167,6 @@ add_action('wp_enqueue_scripts', 'bappi_scripts');
 /**
  * Implement the Custom Header feature.
  */
-// require get_template_directory() . '/inc/custom-header.php';
 
 /**
  * Custom template tags for this theme.
@@ -174,7 +181,6 @@ require get_template_directory() . '/inc/template-functions.php';
 /**
  * Customizer additions.
  */
-require get_template_directory() . '/inc/customizer.php';
 
 /**
  * Load Jetpack compatibility file.

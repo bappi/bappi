@@ -11,9 +11,7 @@
   wp.customize("background_color", function (value) {
     value.bind(function (newval) {
       // console.log("background_color newval", newval);
-      $(
-        "[type='search'],input,.site-description,.menu .children,.sub-menu"
-      ).css({
+      $("[type='search'],input,.menu .children,.sub-menu").css({
         backgroundColor: newval,
       });
       $(".entry-header .entry-title,.entry-header .entry-title a").css({
@@ -30,7 +28,7 @@
         "background-color": newval,
       });
       $(
-        ".site-title a,a,a:visited, .main-navigation .menu-item a, button, input,.widget-title,body,.site-description,textarea "
+        ".site-title a,a,a:visited, .main-navigation .menu-item a, button, input,.widget-title,body,textarea "
       ).css({
         color: newval,
       });
@@ -56,6 +54,34 @@
       ).css({
         borderColor: newval,
       });
+    });
+  });
+
+  // Header Text color
+
+  wp.customize("header_textcolor", function (value) {
+    value.bind(function (newval) {
+      console.log("setting heder text color", newval);
+      $(".site-description").css({
+        color: newval,
+      });
+    });
+  });
+  //
+  wp.customize("show_header_center", function (value) {
+    value.bind(function (newval) {
+      console.log("setting heder text color", newval);
+      if (newval) {
+        $(".site-branding,.main-navigation").css({
+          "justify-content": "center",
+          "text-align": "center",
+        });
+      } else {
+        $(".site-branding,.main-navigation").css({
+          "justify-content": "flex-start",
+          "text-align": "left",
+        });
+      }
     });
   });
 })(jQuery);

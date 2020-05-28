@@ -37,10 +37,11 @@ class bappi_customize
         $wp_customize->add_setting(
             'link_textcolor', //No need to use a SERIALIZED name, as `theme_mod` settings already live under one db record
             array(
-                'default'    => '#2BA6CB', //Default setting/value to save
+                'default'    => '#B2DF82', //Default setting/value to save
                 'type'       => 'theme_mod', //Is this an 'option' or a 'theme_mod'?
                 'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
                 'transport'  => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+                'sanitize_callback' => 'esc_attr',
             )
         );
 
@@ -51,33 +52,34 @@ class bappi_customize
             array(
                 'label'      => __('Secondary Color', 'bappi'), //Admin-visible name of the control
                 'settings'   => 'link_textcolor', //Which setting to load and manipulate (serialized is okay)
-                'priority'   => 10, //Determines the order this control appears in for the specified section
+                'priority'   => 9, //Determines the order this control appears in for the specified section
                 'section'    => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
             )
         ));
+        $wp_customize->add_setting('header_textcolor', array(
+            'default'   => '#B2DF82',
+            'transport' => 'postMessage',
+            'sanitize_callback' => 'esc_attr',
+        ));
 
-        //3. Register new settings to the WP database...
-        $wp_customize->add_setting(
-            'focus_textcolor', //No need to use a SERIALIZED name, as `theme_mod` settings already live under one db record
-            array(
-                'default'    => '#2BA6CB', //Default setting/value to save
-                'type'       => 'theme_mod', //Is this an 'option' or a 'theme_mod'?
-                'capability' => 'edit_theme_options', //Optional. Special permissions for accessing this setting.
-                'transport'  => 'postMessage', //What triggers a refresh of the setting? 'refresh' or 'postMessage' (instant)?
+        $wp_customize->add_setting('show_header_center', array(
+            'default'    => '0',
+            'transport' => 'postMessage',
+            'sanitize_callback' => 'esc_attr', // Sanitize input
+        ));
+
+        $wp_customize->add_control(
+            new WP_Customize_Control(
+                $wp_customize,
+                'show_header_center',
+                array(
+                    'label'     => __('Text Alignment Center', 'bappi'),
+                    'section'   => 'colors',
+                    'settings'  => 'show_header_center',
+                    'type'      => 'checkbox',
+                )
             )
         );
-
-        //3. Finally, we define the control itself (which links a setting to a section and renders the HTML controls)...
-        $wp_customize->add_control(new WP_Customize_Color_Control( //Instantiate the color control class
-            $wp_customize, //Pass the $wp_customize object (required)
-            'mytheme_focus_textcolor', //Set a unique ID for the control
-            array(
-                'label'      => __('Focus Color', 'bappi'), //Admin-visible name of the control
-                'settings'   => 'focus_textcolor', //Which setting to load and manipulate (serialized is okay)
-                'priority'   => 10, //Determines the order this control appears in for the specified section
-                'section'    => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
-            )
-        ));
 
         //4. We can also change built-in settings by modifying properties. For instance, let's make some stuff use live preview JS...
         $wp_customize->get_setting('blogname')->transport = 'postMessage';
@@ -100,7 +102,7 @@ class bappi_customize
         <!--Customizer CSS-->
         <style type="text/css">
             /* link text color: color */
-            <?php self::generate_css('.site-title a,a,a:visited,a:hover, .main-navigation .menu-item a, button, input,.widget-title,body,.site-description,textarea', 'color', 'link_textcolor'); ?>
+            <?php self::generate_css('.site-title a,a,a:visited,a:hover, .main-navigation .menu-item a, button, input,.widget-title,body,textarea', 'color', 'link_textcolor'); ?>
             /* link text color  background*/
             <?php self::generate_css('.entry-title', 'background-color', 'link_textcolor'); ?>
             /* link text color  border*/
@@ -108,13 +110,24 @@ class bappi_customize
             /* background color: color */
             <?php self::generate_css('.entry-header .entry-title,.entry-header .entry-title a', 'color', 'background_color', '#'); ?>
             /* background color: background-color */
-            <?php self::generate_css("[type='search'],input,.menu .children, .main-navigation .sub-menu .menu-item,.site-description", 'background-color', 'background_color', '#'); ?>
-            /* Focus Color border-color  */
-            <?php self::generate_css('input[type="text"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="number"]:focus, input[type="tel"]:focus, input[type="range"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="week"]:focus, input[type="time"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus,button:active, button:focus, input[type="button"]:active, input[type="button"]:focus, input[type="reset"]:active, input[type="reset"]:focus, input[type="submit"]:active, input[type="submit"]:focus', 'border-color', 'focus_textcolor', ''); ?>
-            /* focus color color */
-            <?php self::generate_css('a:focus', 'color', 'focus_textcolor', ''); ?>
+            <?php self::generate_css("[type='search'],input,.menu .children, .main-navigation .sub-menu .menu-item", 'background-color', 'background_color', '#'); ?>
+            /* Header Text Color */
+            <?php self::generate_css('.site-description', 'color', 'header_textcolor', '#'); ?>
         </style>
         <!--/Customizer CSS-->
+        <?php
+        $header_alignment = get_theme_mod('show_header_center');
+        if ($header_alignment == 1) {
+        ?><style>
+                .site-branding,
+                .main-navigation {
+                    justify-content: center;
+                    text-align: center;
+                }
+            </style>
+        <?php }
+        ?>
+        </style>
 <?php
     }
 
@@ -131,13 +144,7 @@ class bappi_customize
      */
     public static function live_preview()
     {
-        wp_enqueue_script(
-            'mytheme-themecustomizer', // Give the script a unique ID
-            get_template_directory_uri() . '/js/theme-customizer.js', // Define the path to the JS file
-            array('jquery', 'customize-preview'), // Define dependencies
-            '', // Define a version (optional) 
-            true // Specify whether to put in footer (leave this true)
-        );
+        wp_enqueue_script('customizer-js', get_theme_file_uri('/js/customizer.js'), array('jquery'), '1.0', true);
     }
 
     /**

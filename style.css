@@ -1,13 +1,11 @@
 @charset "UTF-8";
 /*!
-Theme Name: Bappi
-Theme URI: https://wordpress.org/themes/bappi
+Theme Name: bappi
+Theme URI: http://bappli.blog/themes/bappi 
 Author: b-07
 Author URI: http://bappi.blog/
 Description: A simple hacker style theme.
 Version: 1.0.0
-Tested up to: 5.4
-Requires PHP: 5.6
 License: GNU General Public License v2 or later
 License URI: LICENSE
 Text Domain: bappi
@@ -186,7 +184,9 @@ textarea {
 [type="number"]::-webkit-outer-spin-button {
 	height: auto;
 }
-
+.text-center {
+	text-align: center;
+}
 /**
  * 1. Correct the odd appearance in Chrome and Safari.
  * 2. Correct the outline style in Safari.
@@ -251,6 +251,41 @@ template {
 
 [hidden] {
 	display: none;
+}
+
+/* ----------------------------------------------
+# Focus Color
+---------------------------------------------- */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+input[type="number"]:focus,
+input[type="tel"]:focus,
+input[type="range"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="week"]:focus,
+input[type="time"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+button:active,
+button:focus,
+input[type="button"]:active,
+input[type="button"]:focus,
+input[type="reset"]:active,
+input[type="reset"]:focus,
+input[type="submit"]:active,
+input[type="submit"]:focus {
+	border-color: #f8805b;
+}
+a:focus {
+	color: #f8805b;
+}
+
+.content-center {
+	margin-left: 16.66%;
 }
 /*----------------------------------------------------------------
 # Normalize
@@ -1174,6 +1209,9 @@ a,
 }*/
 
 @media (max-width: 767px) {
+	.content-center {
+		margin-left: 0%;
+	}
 	.row {
 		max-width: 100%;
 	}

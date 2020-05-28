@@ -27,8 +27,20 @@
 		<a class="skip-link screen-reader-text" href="#content">
 			<?php esc_html_e('Skip to content', 'bappi'); ?>
 		</a>
+		<?php
 
+
+		?>
 		<header id="masthead" class="site-header">
+			<div class="backgorund-image text-center">
+				<?php
+
+				if (get_header_image()) : ?>
+					<img alt="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" src="<?php header_image(); ?>" width="<?php echo absint(get_custom_header()->width); ?>" height="<?php echo absint(get_custom_header()->height); ?>">
+				<?php
+				endif;
+				?>
+			</div>
 			<div class="row">
 				<div class="site-branding">
 					<?php if (has_custom_logo()) : ?>
