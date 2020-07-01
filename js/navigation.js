@@ -154,17 +154,12 @@
 				elements = modal.querySelectorAll( selectors );
         elements = Array.prototype.slice.call( elements );
       
-
 				lastEl = elements[ elements.length - 1 ];
 				firstEl = elements[0];
 				activeEl = _doc.activeElement;
 				tabKey = event.keyCode === 9;
         shiftKey = event.shiftKey;
-        //console.log('active element',activeEl);
-        // if(activeEl.parent('li').hasClass('.menu-item-has-children')){
-        //   activeEl.parent('li').addClass('test');
-        //   event.preventDefault();
-        // }
+    
 				if ( ! shiftKey && tabKey && lastEl === activeEl ) {
 					event.preventDefault();
           firstEl.focus();

@@ -56,10 +56,6 @@ class bappi_customize
                 'section'    => 'colors', //ID of the section this control should render in (can be one of yours, or a WordPress default section)
             )
         ));
-        $wp_customize->add_setting('header_textcolor', array(
-            'default'   => '#B2DF82',
-            'transport' => 'postMessage',
-        ));
 
         $wp_customize->add_setting('show_header_center', array(
             'default'    => '0',

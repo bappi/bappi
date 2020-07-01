@@ -85,7 +85,7 @@ if (!function_exists('bappi_setup')) :
 		$args = array(
 			'default-image'      => '',
 			'width'              => 1000,
-			'default-text-color' => '00B71E',
+			'default-text-color' => 'B2DF82',
 			'height'             => 125,
 			'flex-width'         => true,
 			'flex-height'        => true,
