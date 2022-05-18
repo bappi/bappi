@@ -11,6 +11,6 @@ $tl_dr = {
     [6] => 'react enthusiast',
     [7] => 'drummer',
     [8] => 'biker',
-    [8] => 'globetrotter',
+    [9] => 'maverick',
 }
 ```
