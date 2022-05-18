@@ -1,5 +1,3 @@
-## Bappi
-
 ```
 $tl_dr = {
     [0] => 'software engineer',
