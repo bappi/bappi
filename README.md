@@ -14,3 +14,11 @@ $tl_dr = {
     [9] => 'maverick',
 }
 ```
+
+```
+$find_me = {
+    [0] => 'WordPress ',
+    [1] => 'blog',
+    [2] => '[twitter](https://twitter.com/bappi)',
+}
+```
