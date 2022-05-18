@@ -1,5 +1,18 @@
-# Yo! 👋
+### //Hi,  my name is
 
-## I'm Bappi
+## Bappi
 
-### I’m a WordPress developer, core contributor, and technical support expert. I enjoy writing plugins and themes, and I love solving complex problems. I’m also a drummer and an avid biker.
+```
+$tl_dr = {
+  [0] => 'software engineer',
+  [1] => 'WordPress plugin developer',
+  [2] => 'WooCommerce sorcerer',
+  [3] => 'WordPress core contributor',
+  [4] => 'php warrior',
+  [5] => 'JavaScript fanatic',
+  [6] => 'react enthusiast',
+  [7] => 'drummer',
+  [8] => 'biker',
+  [8] => 'globetrotter',
+}
+```
