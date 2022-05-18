@@ -20,5 +20,10 @@ $find_me = {
     [0] => 'WordPress ',
     [1] => 'blog',
     [2] => '[twitter](https://twitter.com/bappi)',
+    <pre>
+ <code>
+  <a href="https://github.com/gmarciani">gmarciani</a>
+ </code>
+</pre>
 }
 ```
