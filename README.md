@@ -7,8 +7,5 @@ $tl_dr = {
     [4] => 'php warrior',
     [5] => 'JavaScript fanatic',
     [6] => 'react enthusiast',
-    [7] => 'drummer',
-    [8] => 'biker',
-    [9] => 'maverick',
 }
 ```
