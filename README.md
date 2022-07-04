@@ -1,11 +1,9 @@
 ```
 $tl_dr = {
-    [0] => 'software engineer',
-    [1] => 'WordPress plugin developer',
-    [2] => 'WooCommerce sorcerer',
-    [3] => 'WordPress core contributor',
-    [4] => 'php warrior',
-    [5] => 'JavaScript fanatic',
-    [6] => 'react enthusiast',
+    [0] => 'WordPress plugin architect',
+    [1] => 'woocommerce sorcerer',
+    [2] => 'php warrior',
+    [3] => 'javascript fanatic',
+    [4] => 'react enthusiast',
 }
 ```
