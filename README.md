@@ -1,6 +1,6 @@
 ```
 $tl_dr = {
-    [0] => 'WordPress plugin architect',
+    [0] => 'wordpress plugin architect',
     [1] => 'woocommerce sorcerer',
     [2] => 'php warrior',
     [3] => 'javascript fanatic',
