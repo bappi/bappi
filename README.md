@@ -5,6 +5,5 @@ $tl_dr = {
     [2] => 'php warrior',
     [3] => 'javascript fanatic',
     [4] => 'react enthusiast',
-    [5] => 'not on any social media',
 }
 ```
